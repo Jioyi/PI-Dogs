@@ -1,0 +1,11 @@
+.page {
+	display: table;
+	table-layout: fixed;
+	height: 100%;
+	width: 100%;
+}
+
+.page-content {
+	display: block;
+	min-height: 100%;
+}

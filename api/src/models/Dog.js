@@ -12,8 +12,8 @@ module.exports = (sequelize) => {
   temperament*/
 	sequelize.define('dog', {
 		name: { type: DataTypes.STRING, allowNull: false },
-    height: { type: DataTypes.STRING, allowNull: false },
-    weight: { type: DataTypes.STRING, allowNull: false },
+    height: { type: DataTypes.JSONB, allowNull: false },
+    weight: { type: DataTypes.JSONB, allowNull: false },
     life_span: { type: DataTypes.STRING },
     /*breed_group: { type: DataTypes.STRING },
     bred_for: { type: DataTypes.STRING },

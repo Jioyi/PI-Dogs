@@ -1,16 +1,17 @@
-const { Dog } = require('../db');
+const { Temperament, Dog } = require('../db');
 const { Op } = require('sequelize');
 
 exports.getDogs = async (req, res) => {
 	const name = req.query.name;
+	console.log(name);
 	if (name) {
 		const dogs = await Dog.findAll({
 			where: {
-				name: { [Op.like]: `%${name}%` },
+				name: { [Op.iLike]: `%${name}%` },
 			},
-			limit: 8,
 			attributes: ['name'],
 		});
+		console.log(dogs);
 		if (dogs.length === 0) {
 			return res.json({ message: 'No tenemos de esa raza' });
 		}
@@ -36,6 +37,15 @@ exports.getDogForId = async (req, res) => {
 				id: id,
 			},
 			attributes: ['id', 'name', 'height', 'weight', 'life_span'],
+			include: [
+				{
+					model: Temperament,
+					attributes: ['name'],
+					through: {
+						attributes: [],
+					},
+				},
+			],
 		});
 		if (!dog) {
 			return res.json({ message: 'No tenemos de esa raza' });

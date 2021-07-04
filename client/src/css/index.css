@@ -1,0 +1,31 @@
+:root {
+    --yellow: #ffc107;
+    --yellow2: #ffc823;
+    --white: #ffffff;
+    --white: #000000;
+    --box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    --opacity-white: rgba(255, 255, 255, 0.5);
+    --opacity-white-high: rgba(255, 255, 255, 0.7);
+    --h1-shadow: #ffffff;
+    --h1-shadow2: #ffc107;
+    --font: 'Helvetica Neue', 'Arial', 'Helvetica', sans-serif;
+    --font-button: 'Helvetica Neue', 'Arial', 'Helvetica', sans-serif;
+}
+
+body {
+	line-height: 1.45;
+	font-size: 0.875rem;
+	color: #343a40;
+	font-family: var(--font);
+	margin: 0;
+	padding-top: 42px;
+	padding: 0;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+#root {
+	height: 100%;
+}

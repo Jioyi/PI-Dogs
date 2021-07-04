@@ -1,0 +1,1 @@
+export const CHECK_ACCEPT = 'CHECK_ACCEPT';
