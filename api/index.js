@@ -19,11 +19,11 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
-const updateDogsApi = require('./src/updateDogsApi');
+const getApiData = require('./src/getApiData');
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
 	//Update Dogs Api
-	updateDogsApi();
+	getApiData();
 
 	server.listen(3001, () => {
 		console.log('%s listening at 3001'); // eslint-disable-line no-console

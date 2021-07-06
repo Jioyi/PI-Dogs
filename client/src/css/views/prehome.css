@@ -1,11 +1,11 @@
 .prehome {
-	background-image: url(../assets/images/bg.jpg);
+	background-image: url(../../assets/images/bg.jpg);
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-size: cover;
 	margin: 0 auto;
-	padding: 90px 15px;
+	padding: 0px;
 	resize: both;
 	text-align: center;
 	height: 100vh;
@@ -93,9 +93,8 @@
 	font-weight: 600;
 	margin: 0 0 30px;
 	margin-bottom: 40px;
-	color: #000;
-	font-size: 1rem;
 	color: var(--black);
+	font-size: 1rem;
 	text-shadow: 1px 0 0 var(--h1-shadow2), -1px 0 0 var(--h1-shadow2),
 		0 1px 0 var(--h1-shadow2), 0 -1px 0 var(--h1-shadow2),
 		1px 1px var(--h1-shadow2), -1px -1px 0 var(--h1-shadow2),
@@ -129,7 +128,7 @@
 
 @media only screen and (max-width: 767px) {
 	.prehome {
-		background-image: url(../assets/images/bg_movile.jpg);
+		background-image: url(../../assets/images/bg_movile.jpg);
 	}
 	.pop-up {
 		max-width: 95% !important;

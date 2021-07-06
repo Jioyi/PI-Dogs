@@ -15,10 +15,7 @@ module.exports = (sequelize) => {
     height: { type: DataTypes.JSONB, allowNull: false },
     weight: { type: DataTypes.JSONB, allowNull: false },
     life_span: { type: DataTypes.STRING },
-    /*breed_group: { type: DataTypes.STRING },
-    bred_for: { type: DataTypes.STRING },
-    origin: { type: DataTypes.STRING },
-    reference_image_id: { type: DataTypes.STRING },*/
+    reference_image_id: { type: DataTypes.STRING },
     external_api_id: { type: DataTypes.INTEGER, unique: true },
 	});
 };

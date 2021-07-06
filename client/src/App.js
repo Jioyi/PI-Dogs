@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 // views
-import PreHome from './views/prehome.js';
-import Home from './views/home.js';
 
+import Home from './views/home';
+import Error404 from './views/error404';
 import './css/App.css';
 
 function App() {
@@ -12,8 +12,8 @@ function App() {
 			{/*<header className="page-header"><Route path="/" component={NavBar} /></header>*/}
 			<div className="page-content">
 				<Switch>
-					<Route exact path="/" component={PreHome} />
 					<Route path="/home" component={Home} />
+					<Route path="*" component={Error404} />
 				</Switch>
 			</div>
 			{/*<div className="page-footer">pie de pagina</div>*/}

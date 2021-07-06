@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import store from './store';
+import PreHome from './views/prehome.js';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './css/index.css';
@@ -12,7 +13,10 @@ const node = (
 	<React.StrictMode>
 		<Provider store={store}>
 			<BrowserRouter>
-				<App />
+				<Switch>
+					<Route exact path="/" component={PreHome} />
+					<Route path="*" component={App} />
+				</Switch>
 			</BrowserRouter>
 		</Provider>
 	</React.StrictMode>

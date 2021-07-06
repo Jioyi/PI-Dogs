@@ -3,40 +3,12 @@ const { Op } = require('sequelize');
 
 exports.getDogs = async (req, res) => {
 	const name = req.query.name;
-	console.log(name);
 	if (name) {
-		const dogs = await Dog.findAll({
+		let dogs = await Dog.findAll({
 			where: {
 				name: { [Op.iLike]: `%${name}%` },
 			},
-			attributes: ['name'],
-		});
-		console.log(dogs);
-		if (dogs.length === 0) {
-			return res.json({ message: 'No tenemos de esa raza' });
-		}
-		return res.json(dogs);
-	} else {
-		const dogs = await Dog.findAll({
-			offset: 0,
-			limit: 8,
-			attributes: ['name'],
-		});
-		if (!dogs) {
-			return res.json({ message: 'Nada' });
-		}
-		return res.json(dogs);
-	}
-};
-
-exports.getDogForId = async (req, res) => {
-	const id = parseInt(req.params.id);
-	if (id) {
-		const dog = await Dog.findOne({
-			where: {
-				id: id,
-			},
-			attributes: ['id', 'name', 'height', 'weight', 'life_span'],
+			attributes: ['name', 'id', 'reference_image_id'],
 			include: [
 				{
 					model: Temperament,
@@ -47,11 +19,54 @@ exports.getDogForId = async (req, res) => {
 				},
 			],
 		});
+		if (dogs.length === 0)
+			return res.status(204).json({ message: 'Search result not found' });
+		return res.status(200).json(dogs);
+	}
+	let dogs = await Dog.findAll({
+		offset: 0,
+		limit: 8,
+		attributes: ['name', 'id', 'reference_image_id'],
+		include: [
+			{
+				model: Temperament,
+				attributes: ['name'],
+				through: {
+					attributes: [],
+				},
+			},
+		],
+	});
+	if (!dogs)  return res.status(204).json({ message: 'Search result not found' });
+	return res.status(200).json(dogs);
+};
+
+exports.getDogForId = async (req, res) => {
+	const id = parseInt(req.params.id);
+	if (id) {
+		const dog = await Dog.findOne({
+			where: { id: id },
+			attributes: [
+				'id',
+				'name',
+				'height',
+				'weight',
+				'life_span',
+				'reference_image_id',
+			],
+			include: [
+				{
+					model: Temperament,
+					attributes: ['name'],
+					through: { attributes: [] },
+				},
+			],
+		});
 		if (!dog) {
-			return res.json({ message: 'No tenemos de esa raza' });
+			return res.status(204).json({ message: 'Search result not found' });
 		}
-		return res.json(dog);
+		return res.status(200).json(dog);
 	} else {
-		return res.json({ message: 'Nada' });
+		return res.status(400).json({ message: 'Bad Request' });
 	}
 };

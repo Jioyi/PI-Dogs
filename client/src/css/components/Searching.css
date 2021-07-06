@@ -1,0 +1,32 @@
+.searching-container {
+	display: flex;
+	flex-direction: column;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.searching-img {
+	display: block;
+	height: 200px;
+	margin: 0;
+	padding: 0;
+}
+
+.searching-text {
+	font-weight: 600;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color: var(--black);
+	font-size: 2rem;
+	text-shadow: 1px 0 0 var(--h1-shadow2), -1px 0 0 var(--h1-shadow2),
+		0 1px 0 var(--h1-shadow2), 0 -1px 0 var(--h1-shadow2),
+		1px 1px var(--h1-shadow2), -1px -1px 0 var(--h1-shadow2),
+		1px -1px 0 var(--h1-shadow2), -1px 1px 0 var(--h1-shadow2);
+}
+
+@media only screen and (max-width: 650px) {
+	.searching-img {
+		width: 95% !important;
+		height: auto;
+	}
+}

@@ -1,0 +1,70 @@
+.dog-container {
+	flex-basis: 25%;
+	padding: 20px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.dog-sub {
+	height: min-content;
+	width: min-content;
+	border-radius: 12px 12px 12px 12px;
+	border-style: solid;
+	box-shadow: var(--box-shadow);
+	border-color: var(--white);
+	margin: 0;
+	padding: 0px;
+}
+
+.dog-name {
+	border-radius: 12px 12px 0px 0px;
+	margin: 0;
+	vertical-align: middle;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 250px;
+	height: 40px;
+	background-color: var(--yellow);
+	font-family: var(--font2);
+	font-weight: 600;
+}
+
+.dog-img {
+	display: block;
+	height: 200px;
+	width: 250px;
+	object-fit: cover;
+	margin: 0;
+	padding: 0;
+}
+
+.dog-temperaments {
+	border-radius: 0px 0px 12px 12px;
+	width: 250px;
+	height: 80px;
+	background-color: var(--yellow);
+    text-align: center; vertical-align: middle;
+    align-content: center;
+	justify-content: center;
+	align-items: center;
+}
+
+.temperament {
+	margin: auto;
+	justify-content: center;
+	align-items: center;
+}
+
+.temperament-sub {
+    display: inline-flex;
+	border-radius: 5px 5px 5px 5px;
+	margin: 2px;
+	padding: 2px 5px 2px 5px;
+	background-color: var(--black);
+	font-family: var(--font2);
+	font-size: 0.8rem;
+	color: var(--yellow);
+}
