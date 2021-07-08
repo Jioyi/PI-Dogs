@@ -3,25 +3,12 @@ import {
 	SET_DOGS,
 	SET_TOTAL_RESULTS,
 	SET_PAGE,
-	SET_BREED,
-	SET_ORDER,
-	SET_ORDER_BY
+	SET_TEMPERAMENTS,
+	SET_BREED_GROUPS,
 } from './types';
 import axios from 'axios';
 
 const URL_MY_API = 'http://localhost:3001/api';
-
-export function setBreed(payload) {
-	return { type: SET_BREED, payload: payload };
-}
-
-export function setOrder(payload) {
-	return { type: SET_ORDER, payload: payload };
-}
-
-export function setOrderBy(payload) {
-	return { type: SET_ORDER_BY, payload: payload };
-}
 
 export function setPage(payload) {
 	return { type: SET_PAGE, payload: payload };
@@ -45,11 +32,19 @@ export function setTotalResults(payload) {
 	};
 }
 
-export function getDogs({ breed, page, order, orderBy }) {
+export function setTemperaments(payload) {
+	return { type: SET_TEMPERAMENTS, payload: payload };
+}
+
+export function setBreedGroups(payload) {
+	return { type: SET_BREED_GROUPS, payload: payload };
+}
+
+export function getDogs({ page ,breed, order, orderBy, filter, filterBy }) {
 	return (dispatch) => {
-		let URL = `${URL_MY_API}/dogs?page=${page}&order=${order}&orderBy=${orderBy}`;
+		let URL = `${URL_MY_API}/dogs?page=${page}&order=${order}&orderBy=${orderBy}&filter=${filter}&filterBy=${filterBy}`;
 		if (breed !== '') {
-			URL = `${URL_MY_API}/dogs?name=${breed}&page=${page}&order=${order}&orderBy=${orderBy}`;
+			URL = `${URL_MY_API}/dogs?name=${breed}&page=${page}&order=${order}&orderBy=${orderBy}&filter=${filter}&filterBy=${filterBy}`;
 		}
 		dispatch(loading(true));
 		axios
@@ -65,6 +60,42 @@ export function getDogs({ breed, page, order, orderBy }) {
 						dispatch(setTotalResults(0));
 						dispatch(setDogs([]));
 						dispatch(loading(false));
+					}
+				}
+			});
+	};
+}
+
+export function getTemperaments() {
+	return (dispatch) => {
+		let URL = `${URL_MY_API}/temperament`;
+		axios
+			.get(URL)
+			.then((response) => {
+				dispatch(setTemperaments(response.data));
+			})
+			.catch((error) => {
+				if (error.response?.status) {
+					if (error.response.status === 404) {
+						dispatch(setTemperaments([]));
+					}
+				}
+			});
+	};
+}
+
+export function getBreedGroups() {
+	return (dispatch) => {
+		let URL = `${URL_MY_API}/breed_group`;
+		axios
+			.get(URL)
+			.then((response) => {
+				dispatch(setBreedGroups(response.data));
+			})
+			.catch((error) => {
+				if (error.response?.status) {
+					if (error.response.status === 404) {
+						dispatch(setBreedGroups([]));
 					}
 				}
 			});

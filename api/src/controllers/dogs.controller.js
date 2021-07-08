@@ -1,4 +1,4 @@
-const { Temperament, Dog } = require('../db');
+const { Breed_group, Temperament, Dog } = require('../db');
 const { Op } = require('sequelize');
 const { findAll, findOne, isInt } = require('../utils');
 
@@ -7,7 +7,15 @@ const pageLimit = 8;
 exports.getDogs = async (req, res, next) => {
 	try {
 		let currentPage = 1;
-		let { name, page, order, orderBy } = req.query;
+		let { name, page, order, orderBy, filter, filterBy } = req.query;
+
+		let filterName = {};
+		if (name) {
+			filterName = { name: { [Op.iLike]: `%${name}%` } };
+		}
+
+		if (page) page = parseInt(page);
+		if (isInt(page)) currentPage = page;
 
 		let orderSelected = 'ASC';
 		if (order && order === 'DESC') orderSelected = 'DESC';
@@ -15,71 +23,73 @@ exports.getDogs = async (req, res, next) => {
 		let orderBySelected = 'name';
 		if (orderBy && orderBy === 'weight') orderBySelected = 'weight.metric';
 
-		page = parseInt(page);
-		if (page && isInt(page)) currentPage = page;
+		let includeBreedGroup = {
+			model: Breed_group,
+			attributes: ['name'],
+			through: {
+				attributes: [],
+			},
+		};
 
-		if (name) {
-			let paginationTotal = await findAll(Dog, {
-				where: {
-					name: { [Op.iLike]: `%${name}%` },
-				},
-				attributes: ['name'],
-			});
-			let offset = (currentPage - 1) * 8;
-			let dogs = await findAll(Dog, {
-				offset: offset,
-				limit: pageLimit,
-				where: {
-					name: { [Op.iLike]: `%${name}%` },
-				},
-				attributes: ['name', 'id', 'image', 'weight'],
-				order: [[orderBySelected, orderSelected]],
-				include: [
-					{
-						model: Temperament,
-						attributes: ['name'],
-						through: {
-							attributes: [],
-						},
+		let includeTemperament = {
+			model: Temperament,
+			attributes: ['name'],
+			through: {
+				attributes: [],
+			},
+		};
+
+		if (filterBy === 'breed_group') {
+			if (filter && filter !== 'All') {
+				includeBreedGroup = {
+					model: Breed_group,
+					attributes: ['name'],
+					where: {
+						name: filter,
 					},
-				],
-			});
-			return dogs.length !== 0
-				? res.json({ dogs: dogs, totalResults: paginationTotal.length })
-				: res.status(404).json({ message: 'Search result not found' });
+					through: {
+						attributes: [],
+					},
+				};
+			}
 		} else {
-			let paginationTotal = await findAll(Dog, {
-				attributes: ['name'],
-				include: [
-					{
-						model: Temperament,
-						attributes: ['name'],
-						through: {
-							attributes: [],
-						},
+			if (filter && filter !== 'All') {
+				includeTemperament = {
+					model: Temperament,
+					attributes: ['name'],
+					where: {
+						name: filter,
 					},
-				],
-			});
-			let offset = (currentPage - 1) * 8;
-			let dogs = await findAll(Dog, {
-				offset: offset,
-				limit: pageLimit,
-				attributes: ['name', 'id', 'image', 'weight'],
-				order: [[orderBySelected, orderSelected]],
-				include: [
-					{
-						model: Temperament,
-						attributes: ['name'],
-						through: {
-							attributes: [],
-						},
+					through: {
+						attributes: [],
 					},
-				],
-			});
-			return dogs.length !== 0
-				? res.json({ dogs: dogs, totalResults: paginationTotal.length })
-				: res.status(404).json({ message: 'Search result not found' });
+				};
+			}
 		}
+
+		let include = [includeBreedGroup, includeTemperament];
+
+		let paginationTotal = await findAll(Dog, {
+			where: filterName,
+			attributes: ['name', 'id', 'image', 'weight'],
+			order: [[orderBySelected, orderSelected]],
+			include: include,
+		});
+
+		let offset = (currentPage - 1) * pageLimit;
+
+		let dogs = await findAll(Dog, {
+			limit: pageLimit,
+			offset: offset,
+			where: filterName,
+			attributes: ['name', 'id', 'image', 'weight'],
+			order: [[orderBySelected, orderSelected]],
+			include: include,
+		});
+
+		return dogs.length !== 0
+			? res.json({ dogs: dogs, totalResults: paginationTotal.length })
+			: res.status(404).json({ message: 'Search result not found' });
 	} catch (error) {
 		next(error);
 	}

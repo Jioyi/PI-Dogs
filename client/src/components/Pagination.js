@@ -26,7 +26,6 @@ function Pagination(props) {
         }
     }
 
-
 	let pages = Array.from(Array(endPage + 1 - startPage).keys()).map(
 		(i) => startPage + i
 	);

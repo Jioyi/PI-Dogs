@@ -14,6 +14,7 @@ export default function Dogs({ dogs }) {
 						image={dog.image}
 						weight={dog.weight}
 						temperaments={dog.temperaments}
+						groups={dog.breed_groups}
 					/>
 				))}
 			</div>

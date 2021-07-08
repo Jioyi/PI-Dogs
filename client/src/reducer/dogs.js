@@ -3,9 +3,8 @@ import {
 	LOADING_DOGS,
 	SET_TOTAL_RESULTS,
 	SET_PAGE,
-	SET_BREED,
-	SET_ORDER,
-	SET_ORDER_BY,
+	SET_TEMPERAMENTS,
+	SET_BREED_GROUPS
 } from '../actions/types';
 
 const initialState = {
@@ -13,29 +12,13 @@ const initialState = {
 	loading: true,
 	totalResults: 0,
 	page: 1,
-	breed: '',
-	order: 'ASC',
-	orderBy: 'name',
+	temperaments: [],
+	breedGroups: [],
 };
 
 export default function dogs(state = initialState, action) {
 	const { type, payload } = action;
 	switch (type) {
-		case SET_BREED:
-			return {
-				...state,
-				breed: payload,
-			};
-		case SET_ORDER_BY:
-			return {
-				...state,
-				orderBy: payload,
-			};
-		case SET_ORDER:
-			return {
-				...state,
-				order: payload,
-			};
 		case SET_DOGS:
 			return {
 				...state,
@@ -55,6 +38,16 @@ export default function dogs(state = initialState, action) {
 			return {
 				...state,
 				page: payload,
+			};
+		case SET_TEMPERAMENTS:
+			return {
+				...state,
+				temperaments: payload,
+			};
+		case SET_BREED_GROUPS:
+			return {
+				...state,
+				breedGroups: payload,
 			};
 		default:
 			return state;
