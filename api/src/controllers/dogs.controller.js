@@ -1,72 +1,112 @@
 const { Temperament, Dog } = require('../db');
 const { Op } = require('sequelize');
+const { findAll, findOne, isInt } = require('../utils');
 
-exports.getDogs = async (req, res) => {
-	const name = req.query.name;
-	if (name) {
-		let dogs = await Dog.findAll({
-			where: {
-				name: { [Op.iLike]: `%${name}%` },
-			},
-			attributes: ['name', 'id', 'reference_image_id'],
-			include: [
-				{
-					model: Temperament,
-					attributes: ['name'],
-					through: {
-						attributes: [],
-					},
+const pageLimit = 8;
+
+exports.getDogs = async (req, res, next) => {
+	try {
+		let currentPage = 1;
+		let { name, page, order, orderBy } = req.query;
+
+		let orderSelected = 'ASC';
+		if (order && order === 'DESC') orderSelected = 'DESC';
+
+		let orderBySelected = 'name';
+		if (orderBy && orderBy === 'weight') orderBySelected = 'weight.metric';
+
+		page = parseInt(page);
+		if (page && isInt(page)) currentPage = page;
+
+		if (name) {
+			let paginationTotal = await findAll(Dog, {
+				where: {
+					name: { [Op.iLike]: `%${name}%` },
 				},
-			],
-		});
-		if (dogs.length === 0)
-			return res.status(204).json({ message: 'Search result not found' });
-		return res.status(200).json(dogs);
-	}
-	let dogs = await Dog.findAll({
-		offset: 0,
-		limit: 8,
-		attributes: ['name', 'id', 'reference_image_id'],
-		include: [
-			{
-				model: Temperament,
 				attributes: ['name'],
-				through: {
-					attributes: [],
+			});
+			let offset = (currentPage - 1) * 8;
+			let dogs = await findAll(Dog, {
+				offset: offset,
+				limit: pageLimit,
+				where: {
+					name: { [Op.iLike]: `%${name}%` },
 				},
-			},
-		],
-	});
-	if (!dogs)  return res.status(204).json({ message: 'Search result not found' });
-	return res.status(200).json(dogs);
+				attributes: ['name', 'id', 'image', 'weight'],
+				order: [[orderBySelected, orderSelected]],
+				include: [
+					{
+						model: Temperament,
+						attributes: ['name'],
+						through: {
+							attributes: [],
+						},
+					},
+				],
+			});
+			return dogs.length !== 0
+				? res.json({ dogs: dogs, totalResults: paginationTotal.length })
+				: res.status(404).json({ message: 'Search result not found' });
+		} else {
+			let paginationTotal = await findAll(Dog, {
+				attributes: ['name'],
+				include: [
+					{
+						model: Temperament,
+						attributes: ['name'],
+						through: {
+							attributes: [],
+						},
+					},
+				],
+			});
+			let offset = (currentPage - 1) * 8;
+			let dogs = await findAll(Dog, {
+				offset: offset,
+				limit: pageLimit,
+				attributes: ['name', 'id', 'image', 'weight'],
+				order: [[orderBySelected, orderSelected]],
+				include: [
+					{
+						model: Temperament,
+						attributes: ['name'],
+						through: {
+							attributes: [],
+						},
+					},
+				],
+			});
+			return dogs.length !== 0
+				? res.json({ dogs: dogs, totalResults: paginationTotal.length })
+				: res.status(404).json({ message: 'Search result not found' });
+		}
+	} catch (error) {
+		next(error);
+	}
 };
 
-exports.getDogForId = async (req, res) => {
-	const id = parseInt(req.params.id);
-	if (id) {
-		const dog = await Dog.findOne({
-			where: { id: id },
-			attributes: [
-				'id',
-				'name',
-				'height',
-				'weight',
-				'life_span',
-				'reference_image_id',
-			],
-			include: [
-				{
-					model: Temperament,
-					attributes: ['name'],
-					through: { attributes: [] },
-				},
-			],
-		});
-		if (!dog) {
-			return res.status(204).json({ message: 'Search result not found' });
+exports.getDogForId = async (req, res, next) => {
+	try {
+		const id = parseInt(req.params.id);
+		if (id) {
+			let dog = await findOne(Dog, {
+				where: { id: id },
+				attributes: ['id', 'name', 'height', 'weight', 'life_span', 'image'],
+				include: [
+					{
+						model: Temperament,
+						attributes: ['name'],
+						through: { attributes: [] },
+					},
+				],
+			});
+			return dog
+				? res.json(dog)
+				: res.status(404).json({ message: 'Search result not found' });
+		} else {
+			return res.status(404).json({ message: 'Bad Request' });
 		}
-		return res.status(200).json(dog);
-	} else {
-		return res.status(400).json({ message: 'Bad Request' });
+	} catch (error) {
+		next(error);
 	}
 };

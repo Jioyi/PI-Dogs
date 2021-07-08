@@ -1,1 +1,1 @@
-export { getDogs, getDogsForBreed } from './dogs';
+export { getDogs, setPage, setBreed, setOrder, setOrderBy } from './dogs';

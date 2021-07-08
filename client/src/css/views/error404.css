@@ -1,0 +1,40 @@
+.error404 {
+	margin: 0 auto;
+	max-width: 940px;
+	padding: 70px 15px;
+	text-align: center;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.error404 img {
+    width: 100%;
+}
+
+.error404 h1 {
+    font-weight: 400;
+    margin: 0 0 30px;
+    margin-bottom: 40px;
+    color: var(--black);
+    font-size: 1.875rem;
+}
+
+.button-error404 {
+    background: var(--yellow4);
+    font-family: var(--font2);
+	border: 1px solid var(--black);
+	color: var(--black);
+	text-decoration: none;
+    border-radius: 8px;
+	padding: 6px 8px;
+	font-size: 1.6rem;
+	font-weight: bold;
+}
+
+.button-error404:hover {    
+    color: var(--yellow4);
+    background: var(--black);
+    border: 1px solid var(--black);
+}

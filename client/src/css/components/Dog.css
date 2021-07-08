@@ -26,12 +26,25 @@
 	justify-content: center;
 	align-items: center;
 	width: 250px;
-	height: 40px;
+	height: 30px;
 	background-color: var(--yellow);
 	font-family: var(--font2);
 	font-weight: 600;
 }
 
+.dog-weight {
+	border-radius: 0px 0px 0px 0px;
+	margin: 0;
+	vertical-align: middle;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 250px;
+	height: 30px;
+	background-color: var(--yellow);
+	font-family: var(--font2);
+	font-weight: 600;
+}
 .dog-img {
 	display: block;
 	height: 200px;
