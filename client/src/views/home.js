@@ -4,12 +4,7 @@ import { connect } from 'react-redux';
 import Dogs from '../components/Dogs';
 import Searching from '../components/Searching';
 import Pagination from '../components/Pagination';
-import {
-	getDogs,
-	getTemperaments,
-	getBreedGroups,
-	setPage,
-} from '../actions';
+import { getDogs, getTemperaments, getBreedGroups, setPage } from '../actions';
 import {
 	FaSearch,
 	AiOutlineSortDescending,
@@ -40,11 +35,11 @@ function Home(props) {
 		props.getDogs({
 			...filters,
 			page: props.dogs.page,
-		});		
+		});
 	}, [props.dogs.page]);
 
 	const handleOnChange = (e) => {
-		if(e.target.name === "filterBy"){
+		if (e.target.name === 'filterBy') {
 			setFilters({
 				...filters,
 				[e.target.name]: e.target.value,

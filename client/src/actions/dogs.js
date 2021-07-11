@@ -5,6 +5,7 @@ import {
 	SET_PAGE,
 	SET_TEMPERAMENTS,
 	SET_BREED_GROUPS,
+	SET_DOG
 } from './types';
 import axios from 'axios';
 
@@ -96,6 +97,31 @@ export function getBreedGroups() {
 				if (error.response?.status) {
 					if (error.response.status === 404) {
 						dispatch(setBreedGroups([]));
+					}
+				}
+			});
+	};
+}
+
+export function setDog(payload) {
+	return {
+		type: SET_DOG,
+		payload: payload,
+	};
+}
+
+export function getDog(dogId) {
+	return (dispatch) => {
+		let URL = `${URL_MY_API}/dogs/${dogId}`;
+		axios
+			.get(URL)
+			.then((response) => {
+				dispatch(setDog(response.data));
+			})
+			.catch((error) => {
+				if (error.response?.status) {
+					if (error.response.status === 404) {
+						dispatch(setDog(null));
 					}
 				}
 			});

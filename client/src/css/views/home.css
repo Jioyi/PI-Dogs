@@ -19,9 +19,10 @@
 }
 
 .search-sub {
-		margin-top: 8px;
+	margin-top: 8px;
 	margin-bottom: 8px;
-	padding: 0px;
+	padding-right: 35px;
+	padding-left: 35px;
 	border-radius: 8px;
 	background-color: var(--opacity-white-high);
 	box-shadow: var(--box-shadow);
@@ -35,7 +36,7 @@
 .search-blocks {
 	flex-wrap: wrap;
 	text-align: center;
-	display: flex;	
+	display: flex;
 }
 
 .search-blocks-sub {
@@ -174,13 +175,11 @@
 @media only screen and (max-width: 650px) {
 	.search-sub {
 		min-width: 95% !important;
+		padding: 0;
 	}
 }
 @media only screen and (max-width: 650px) {
 	.search-input {
-		min-width: 250px !important;
-	}
-	.search-filters-temps{
-		min-width: 250px !important;
+		min-width: 210px !important;
 	}
 }

@@ -108,6 +108,11 @@ exports.getDogForId = async (req, res, next) => {
 						attributes: ['name'],
 						through: { attributes: [] },
 					},
+					{
+						model: Breed_group,
+						attributes: ['name'],
+						through: { attributes: [] },
+					},
 				],
 			});
 			return dog

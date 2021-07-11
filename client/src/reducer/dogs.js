@@ -4,7 +4,8 @@ import {
 	SET_TOTAL_RESULTS,
 	SET_PAGE,
 	SET_TEMPERAMENTS,
-	SET_BREED_GROUPS
+	SET_BREED_GROUPS,
+	SET_DOG,
 } from '../actions/types';
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
 	page: 1,
 	temperaments: [],
 	breedGroups: [],
+	dog: null,
 };
 
 export default function dogs(state = initialState, action) {
@@ -48,6 +50,11 @@ export default function dogs(state = initialState, action) {
 			return {
 				...state,
 				breedGroups: payload,
+			};
+		case SET_DOG:
+			return {
+				...state,
+				dog: payload,
 			};
 		default:
 			return state;

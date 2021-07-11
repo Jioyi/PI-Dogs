@@ -1,18 +1,20 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-// views
 
+// views
 import Home from './views/home';
 import Error404 from './views/error404';
+import Dog from './views/dog';
 import './css/App.css';
-
+//crear navbar recordar!
 function App() {
 	return (
 		<div className="page">
 			{/*<header className="page-header"><Route path="/" component={NavBar} /></header>*/}
 			<div className="page-content">
 				<Switch>
-					<Route path="/home" component={Home} />
+					<Route exact path="/home" component={Home} />
+					<Route exact path="/dog/:dogId" component={Dog} />
 					<Route path="*" component={Error404} />
 				</Switch>
 			</div>
