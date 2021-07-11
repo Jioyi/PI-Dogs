@@ -6,7 +6,7 @@ import { IoPawSharp } from 'react-icons/all';
 function PreHome() {
 	const history = useHistory();
 	return (
-		<div className="page">
+		<div className="page-prehome">
 			<div className="page-content">
 				<div className="prehome">
 					<div className="float">

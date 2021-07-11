@@ -5,7 +5,34 @@
 	width: 100%;
 }
 
+.page-header {
+	box-shadow: none;
+	color: var(--white);
+	top: 0;
+	position: fixed;
+	width: 100%;
+	display: flex;
+	box-sizing: border-box;
+	flex-direction: column;
+	background: var(--yellow) !important;
+	border-bottom: 2px solid var(--black);
+	height: 50px;
+}
+
 .page-content {
+	padding-top: 50px;
 	display: block;
-	min-height: 100%;
+	height: 100%;
+	padding-bottom: 50px;
+}
+
+.page-footer {
+	text-align: center;
+	width: 100%;
+	height: 50px;
+	position: fixed;
+	bottom: 0;
+	box-sizing: border-box;
+	border-top: 2px solid var(--black);
+	background-color: var(--yellow);
 }

@@ -1,3 +1,10 @@
+.page-prehome {
+	display: table;
+	table-layout: fixed;
+	height: 100%;
+	width: 100%;
+}
+
 .prehome {
 	background-image: url(../../assets/images/bg.jpg);
 	background-position: center center;

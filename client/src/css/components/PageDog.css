@@ -1,13 +1,3 @@
-.page-dog {
-	margin: 0 auto;
-	padding: 0px;
-	resize: both;
-	text-align: center;
-	height: 100vh;
-	display: flex;
-	flex-direction: column;
-}
-
 .page-dog-container {
 	margin: 0 auto;
 	padding: 20px;
