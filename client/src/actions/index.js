@@ -1,1 +1,1 @@
-export { getDogs, setPage, getTemperaments, getBreedGroups, getDog, setDog } from './dogs';
+export { getDogs, setPage, getTemperaments, getBreedGroups, getDog, setDog, createDog, setCreateResponse } from './dogs';

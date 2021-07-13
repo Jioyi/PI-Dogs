@@ -5,6 +5,10 @@
     --yellow4: #ffcf40;
     --white: #ffffff;
     --black: #000000;
+    --successful: #20c997;
+    --successful2: #17a2b8;
+    --danger: #fd7e14;
+    --danger2: #e83c00;
     --box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     --opacity-white: rgba(255, 255, 255, 0.5);
     --opacity-white-high: rgba(255, 255, 255, 0.7);
@@ -13,7 +17,6 @@
     --font: 'Helvetica Neue', 'Arial', 'Helvetica', sans-serif;
     --font2: 'Helvetica Neue', 'Arial', 'Helvetica', sans-serif;
     --font-button: 'Helvetica Neue', 'Arial', 'Helvetica', sans-serif;
-
 }
 
 body {

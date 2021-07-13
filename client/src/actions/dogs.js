@@ -5,7 +5,8 @@ import {
 	SET_PAGE,
 	SET_TEMPERAMENTS,
 	SET_BREED_GROUPS,
-	SET_DOG
+	SET_DOG,
+	SET_CREATE_RESPONSE
 } from './types';
 import axios from 'axios';
 
@@ -41,7 +42,7 @@ export function setBreedGroups(payload) {
 	return { type: SET_BREED_GROUPS, payload: payload };
 }
 
-export function getDogs({ page ,breed, order, orderBy, filter, filterBy }) {
+export function getDogs({ page, breed, order, orderBy, filter, filterBy }) {
 	return (dispatch) => {
 		let URL = `${URL_MY_API}/dogs?page=${page}&order=${order}&orderBy=${orderBy}&filter=${filter}&filterBy=${filterBy}`;
 		if (breed !== '') {
@@ -110,6 +111,13 @@ export function setDog(payload) {
 	};
 }
 
+export function setCreateResponse(payload) {
+	return {
+		type: SET_CREATE_RESPONSE,
+		payload: payload,
+	};
+}
+
 export function getDog(dogId) {
 	return (dispatch) => {
 		let URL = `${URL_MY_API}/dogs/${dogId}`;
@@ -122,6 +130,27 @@ export function getDog(dogId) {
 				if (error.response?.status) {
 					if (error.response.status === 404) {
 						dispatch(setDog(null));
+					}
+				}
+			});
+	};
+}
+
+export function createDog(params) {
+	return (dispatch) => {
+		let URL = `${URL_MY_API}/dog`;
+		axios
+			.post(URL, params)
+			.then((_response) => {
+				dispatch(setCreateResponse("successful"));
+				
+			})
+			.catch((error) => {
+				if (error.response?.status) {
+					if (error.response.status === 404) {
+						dispatch(setCreateResponse("failed"));
+					} else if (error.response.status === 406) {
+						dispatch(setCreateResponse("exist"));
 					}
 				}
 			});

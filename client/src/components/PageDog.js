@@ -12,10 +12,10 @@ export default function PageDog({ dog }) {
 					</div>
 					<div className="page-dog-mid-sub">
 						<div className="page-dog-data">
-							Height: <span className="normal-font">{dog.height.metric}</span>
+							Height: <span className="normal-font">{dog.height.metric} cm</span>
 						</div>
 						<div className="page-dog-data">
-							Weight: <span className="normal-font">{dog.weight.metric}</span>
+							Weight: <span className="normal-font">{dog.weight.metric} kg</span>
 						</div>
 						<div className="page-dog-data">
 							Life span: <span className="normal-font">{dog.life_span}</span>

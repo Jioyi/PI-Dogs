@@ -6,6 +6,7 @@ import {
 	SET_TEMPERAMENTS,
 	SET_BREED_GROUPS,
 	SET_DOG,
+	SET_CREATE_RESPONSE,
 } from '../actions/types';
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
 	temperaments: [],
 	breedGroups: [],
 	dog: null,
+	createResponse: '',
 };
 
 export default function dogs(state = initialState, action) {
@@ -55,6 +57,11 @@ export default function dogs(state = initialState, action) {
 			return {
 				...state,
 				dog: payload,
+			};
+		case SET_CREATE_RESPONSE:
+			return {
+				...state,
+				createResponse: payload,
 			};
 		default:
 			return state;
