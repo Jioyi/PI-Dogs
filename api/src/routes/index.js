@@ -11,5 +11,4 @@ router.get('/temperament', temperament.getTemperaments);
 router.get('/breed_group', temperament.getBreedGroups);
 router.post('/dog', dog.createDog);
 
-
 module.exports = router;

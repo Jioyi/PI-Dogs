@@ -88,7 +88,7 @@ exports.getDogs = async (req, res, next) => {
 		});
 
 		return dogs.length !== 0
-			? res.json({ dogs: dogs, totalResults: paginationTotal.length })
+			? res.status(200).json({ dogs: dogs, totalResults: paginationTotal.length })
 			: res.status(404).json({ message: 'Search result not found' });
 	} catch (error) {
 		next(error);

@@ -1,8 +1,18 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import React from 'react';
+import Dogs from '../src/components/Dogs';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('Componente Dogs', () => {
+	const dogs = [
+		{
+			id: 1,
+			name: 'terrier',
+			image: 'ASDasdasd',
+			weight: { imperial: '2 - 5', metric: '2 - 5' },
+      temperaments: ["lindos","dormilones"],
+      breed_groups: [],
+		}
+	];  
+  render(<Dogs dogs={dogs} />);
+	//expect(screen.queryByText(dogs)).toBeNull();
 });

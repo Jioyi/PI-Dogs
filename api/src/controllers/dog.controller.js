@@ -17,6 +17,8 @@ exports.createDog = async (req, res, next) => {
 		if (name && heightMin && heightMax && weightMin && weightMax) {
 			if (lifeSpan) {
 				lifeSpan += ' years';
+			} else {
+				lifeSpan = "";
 			}
 			if (!image) {
 				image =
@@ -62,7 +64,7 @@ exports.createDog = async (req, res, next) => {
 					dogTemperamentsIds.push(temperamentTarget.id);
 				}
 				dog.setTemperaments(dogTemperamentsIds);	
-				return dog ? res.json(dog) : res.status(404).json({ message: 'error' });
+				return dog ? res.status(200).json(dog) : res.status(404).json({ message: 'error' });
 			} else {
 				return res.status(406).json({ message: 'That race already exists!' });
 			}
