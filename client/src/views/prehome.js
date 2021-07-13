@@ -1,13 +1,12 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import '../css/views/prehome.css';
+import '../css/views/preHome.css';
 import { IoPawSharp } from 'react-icons/all';
 
 function PreHome() {
 	const history = useHistory();
 	return (
 		<div className="page-prehome">
-			<div className="page-content">
 				<div className="prehome">
 					<div className="float">
 						<div className="backdrop"></div>
@@ -41,7 +40,6 @@ function PreHome() {
 						</div>
 					</div>
 				</div>
-			</div>
 		</div>
 	);
 }

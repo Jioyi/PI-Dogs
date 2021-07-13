@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import store from './store';
-import PreHome from './views/prehome.js';
+import PreHome from './views/preHome';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './css/index.css';

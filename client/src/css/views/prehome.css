@@ -20,6 +20,7 @@
 	flex-direction: column;
 	justify-content: center;
 }
+
 .float {
 	position: fixed;
 	z-index: 1040;

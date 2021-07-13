@@ -3,8 +3,9 @@ import { Route, Switch } from 'react-router-dom';
 
 // views
 import Home from './views/home';
-import Error404 from './views/error404';
 import Dog from './views/dog';
+import CreateDog from './views/createDog';
+import Error404 from './views/error404';
 
 import NavBar from './components/NavBar';
 
@@ -20,10 +21,11 @@ function App() {
 				<Switch>
 					<Route exact path="/home" component={Home} />
 					<Route exact path="/dog/:dogId" component={Dog} />
+					<Route exact path="/createdog" component={CreateDog} />
 					<Route path="*" component={Error404} />
 				</Switch>
 			</div>
-			<div className="page-footer">pie de pagina</div>
+			<div className="page-footer"></div>
 		</div>
 	);
 }

@@ -1,0 +1,43 @@
+.create-dog {
+	margin: 0 auto;
+	padding: 0px;
+	resize: both;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+}
+.create-dog-container {
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.create-dog-container-sub {
+	border-radius: 12px 12px 12px 12px;
+	border-style: solid;
+	box-shadow: var(--box-shadow);
+	border-color: var(--white);
+}
+
+.create-dog-start {
+	border-radius: 12px 12px 0px 0px;
+	vertical-align: middle;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 8px;
+	background-color: var(--yellow);
+	font-family: var(--font2);
+	font-weight: 600;
+	color: var(--black);
+}
+
+.create-dog-mid {
+	vertical-align: middle;
+	display: flex;
+}
+
+.create-dog-end {
+	border-radius: 0px 0px 12px 12px;
+	padding-top: 20px;
+	background-color: var(--yellow);
+}
